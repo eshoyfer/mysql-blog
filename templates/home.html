@@ -7,16 +7,13 @@
   <center><table class="pure-table pure-table-bordered">
       <th>""</th>
       <tr>
-      <td>""</td>
-      </tr>
-      <tr>
-      <td>""</td>
-      </tr>
-      <tr>
-      <td>""</td>
-      </tr>
-      <tr>
-      <td>""</td>
+      {% for each in sqlite %}
+      <td>"{{each}}"</td>
+      {% endfor %}
       </tr>
   </table></center>
+  <form method = "POST">
+    <input type="text" name="name" value="name">
+    <input type="text" name="post"> 
+  </form>
 </body>
