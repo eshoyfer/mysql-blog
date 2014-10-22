@@ -4,6 +4,24 @@
 </head>
 <body style = "background:#7BF7B7">
   <h1><center>WELCOME</center></h1>
+
+  <form class = "pure-form pure-form-stacked">
+    <fieldset>
+      <legend>|   Post Here!</legend>
+      <input type = "text" name = "title" placeholder = "Title of post">
+      <style>
+	.textbox{
+	width: 500px;
+	height: 300px;
+	white-space: wrap;
+	}
+      </style>
+
+      <textarea name = "post" cols = "50" rows = "10" placeholder = "Type Here"></textarea>
+      <button type = "submit" name = "b" class = "pure-button pure-button-primary">Confirm</button>
+  </form>
+
+
   <center><table class="pure-table pure-table-bordered">
       <th>""</th>
       <tr>
@@ -12,8 +30,5 @@
       {% endfor %}
       </tr>
   </table></center>
-  <form method = "POST">
-    <input type="text" name="name" value="name">
-    <input type="text" name="post"> 
-  </form>
+
 </body>
