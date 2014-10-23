@@ -33,15 +33,27 @@ def postsWithTitle(title):
     c = conn.cursor()  
 
     q = '''
-    SELECT post FROM POSTS WHERE title == "%s"
+    SELECT * FROM POSTS WHERE title == "%s"
     ''' % (title)
 
-    sql_posts_table = c.execute(q) 
+    # We've got:
+    # title, post, username columns
+
+    sql_posts_table = c.execute(q)
+
     posts_list = []
 
-    for post in sql_posts_table:
-        print post
-        posts_list.append(post[0])
+    for row in sql_posts_table:
+    #    print len(row)
+    #    for i in range(len(row)):
+    #        posts_list[n][i] = row[i]
+
+        this_post = []
+
+        for i in range(len(row)):
+            this_post.append(row[i])
+
+        posts_list.append(this_post)
 
     #print posts_list
     conn.close()
@@ -183,7 +195,7 @@ def register():
 def title(title):
 
     posts = postsWithTitle(title)
-    return render_template("title.html", posts=posts)
+    return render_template("title.html", posts=posts, title=title)
 
 @app.errorhandler(404)
 def not_found(e): # Return rendering, 404
