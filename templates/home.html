@@ -1,34 +1,49 @@
-<title>The Blog</title>
-<head>
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-</head>
-<body style = "background:#7BF7B7">
-  <h1><center>WELCOME</center></h1>
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="jumbotron">
+	<h1>A new way to connect and share what you love.</h1>
+	<p class="lead">Yeah, that probably sounds like the typical fluff that startups use to describe their site on the homepage.</p>
+	<p> Either way, you're probably going to want to register below! Just hit that tempting button.</p>
+  <p> Already registered? Then just make a post! What are you waiting for? (Hopefully not Godot...)</p>
+	<p><a class="btn btn-lg btn-success" href="{{ url_for('register') }}" role="button">Sign up today</a></p>
+</div>
 
-  <form class = "pure-form pure-form-stacked" method = "POST">
-    <fieldset>
-      <legend>|   Post Here!</legend>
-      <input type = "text" name = "title" placeholder = "Title of post">
-      <style>
-	.textbox{
-	width: 500px;
-	height: 300px;
-	white-space: wrap;
-	}
-      </style>
+<div style="text-align:center;">
+  <h1> Make a post! </h1>
+  <form method="POST">
+    <div class="input-group">
+    <span class="input-group-addon">@</span>
+      <input type="text" class="form-control" placeholder="Username" name="username">
+    </div>
 
-      <textarea name = "post" cols = "50" rows = "10" placeholder = "Type Here"></textarea>
-      <button type = "submit" name = "b" class = "pure-button pure-button-primary">Confirm</button>
+    <br>
+
+    <div class="input-group">
+      <span class="input-group-addon">P</span>
+      <input type="password" class="form-control" placeholder="Password" name="password">
+    </div>
+
+    <br>
+
+    <div class="input-group">
+      <span class="input-group-addon">Title</span>
+      <input type="text" class="form-control" placeholder="Title" name="title">
+    </div>
+
+    <br>
+
+    <div class="form-group">
+      <span class="input-group-addon">Content</span>
+      <textarea class="form-control" rows="3" name="post"></textarea>
+    </div>
+
+    <br><br>
+
+    <button type="submit" class="btn btn-info">Let's do this!</button>
+
+    <br><br>
+
   </form>
-
-
-  <center><table class="pure-table pure-table-bordered">
-      <th>""</th>
-      <tr>
-      {% for each in sqlite %}
-      <td>"{{each}}"</td>
-      {% endfor %}
-      </tr>
-  </table></center>
-
-</body>
+</div>
+{% endblock %}

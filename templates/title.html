@@ -1,24 +1,5 @@
-<title></title>
-<head>
-  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-</head>
-<body style = "background:#7BF7B7">
-  <center><table class="pure-table pure-table-bordered">
-      <th>""</th>
-      <tr>
-      <td>""</td>
-      </tr>
-      {{ comments }}
-  </table></center>
-  <center><table class="pure-table pure-table-bordered">
-      <th>"Comments"</th>
-      
-      {% for each in comments %}
-      <tr>
-      <td>{{each}}</td>
-      </tr>
-      {% endfor %}
-
-  </table></center>
-<a href = "/">Return</a>
-</body>
+{% extends "base.html" %}
+{% block title %}Title{% endblock %}
+{% block content %}
+Example content.
+{% endblock %}
