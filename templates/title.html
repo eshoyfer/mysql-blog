@@ -8,13 +8,17 @@
       <tr>
       <td>""</td>
       </tr>
+      {{ comments }}
   </table></center>
   <center><table class="pure-table pure-table-bordered">
       <th>"Comments"</th>
-      <tr>
+      
       {% for each in comments %}
+      <tr>
       <td>{{each}}</td>
       </tr>
+      {% endfor %}
+
   </table></center>
 <a href = "/">Return</a>
 </body>
