@@ -12,6 +12,21 @@
   Make a post!
   </button>
 
+  <br><br>
+
+  <p> Or try a search...
+
+  <form method="POST">
+    <div class="input-group">
+      <span class="input-group-addon">Title search</span>
+      <input type="text" class="form-control" name="title_search" placeholder="Search by title...">
+    </div>
+
+    <br>
+
+    <button type="submit" name="submit" value="search" class="btn btn-info">Seek, and ye shall find!</button>
+  </form>
+
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -47,8 +62,8 @@
                 <span class="input-group-addon">Content</span>
                 <textarea class="form-control" rows="3" name="post"></textarea>
               </div>
-              
-              <button type="submit" class="btn btn-info">Let's do this!</button>
+
+              <button type="submit" value="post" name="submit" class="btn btn-info">Let's do this!</button>
 
               <br><br>
 

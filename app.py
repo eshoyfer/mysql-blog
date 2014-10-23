@@ -60,6 +60,38 @@ def postsWithTitle(title):
 
     return posts_list
 
+def postsByUser(username):
+    conn = sqlite3.connect('blog.db')
+    c = conn.cursor()  
+
+    q = '''
+    SELECT * FROM POSTS WHERE username == "%s"
+    ''' % (username)
+
+    # We've got:
+    # title, post, username columns
+
+    sql_posts_table = c.execute(q)
+
+    posts_list = []
+
+    for row in sql_posts_table:
+    #    print len(row)
+    #    for i in range(len(row)):
+    #        posts_list[n][i] = row[i]
+
+        this_post = []
+
+        for i in range(len(row)):
+            this_post.append(row[i])
+
+        posts_list.append(this_post)
+
+    #print posts_list
+    conn.close()
+
+    return posts_list
+
 # Is the username taken? Simple validation. We're allowed a wide range of usernames, really.
 def validUsername(username):
     conn = sqlite3.connect('blog.db')
@@ -126,29 +158,38 @@ def home():
     if request.method == "GET":
         return render_template("home.html")
     else:
+        # Button press determination
+        button = request.form['submit']
+        print button
+
+        # Search case:
+        if button == "search":
+            query = request.form["title_search"]
+            print query
+            return redirect(url_for('title', title=query))
         # Extract form data
+        else:
+            title = request.form["title"]
+            post = request.form["post"]
+            username = request.form["username"]
+            password = request.form["password"]
+            print title, post, username, password
+            #button = request.form["b"]
 
-        title = request.form["title"]
-        post = request.form["post"]
-        username = request.form["username"]
-        password = request.form["password"]
-        print title, post, username, password
-        #button = request.form["b"]
+            # Validate
 
-        # Validate
+            # Invalid case
+            if not validLogin(username, password):
+                flash("Invalid login! Did you make sure to register?")
+                return redirect(url_for('home'))
 
-        # Invalid case
-        if not validLogin(username, password):
-            flash("Invalid login! Did you make sure to register?")
-            return redirect(url_for('home'))
+            # Valid case
 
-        # Valid case
+            # Add this new content to the table, and associate it with the username.
 
-        # Add this new content to the table, and associate it with the username.
-
-        toTable(title, post, username)
-        flash("Post successfully added!")
-        return render_template("home.html")
+            toTable(title, post, username)
+            flash("Post successfully added!")
+            return render_template("home.html")
 
 
 @app.route("/register", methods = ["GET", "POST"])
@@ -196,6 +237,12 @@ def title(title):
 
     posts = postsWithTitle(title)
     return render_template("title.html", posts=posts, title=title)
+
+@app.route("/user/<username>")
+def user(username):
+
+    posts = postsByUser(username)
+    return render_template("user.html", posts=posts, username=username)
 
 @app.errorhandler(404)
 def not_found(e): # Return rendering, 404
