@@ -164,9 +164,26 @@ def home():
 
         # Search case:
         if button == "search":
-            query = request.form["title_search"]
-            print query
-            return redirect(url_for('title', title=query))
+            print request.form, "HERE"
+            print request.form['title_search']
+            print request.form['user_search']
+            if (request.form["title_search"] != ""):
+                if (request.form["user_search"] != ""):
+                    flash("You can't perform two types of searches at once!")
+                    return redirect(url_for('home')) 
+                else:
+                    query = request.form["title_search"]
+                    print query
+                    return redirect(url_for('title', title=query))
+            else:
+                if (request.form["user_search"] == ""):
+                    flash("You didn't enter anything in either search field!")
+                    return redirect(url_for('home'))
+                else:
+                    query = request.form["user_search"]
+                    print query
+                    return redirect(url_for('user', username=query))
+
         # Extract form data
         else:
             title = request.form["title"]
